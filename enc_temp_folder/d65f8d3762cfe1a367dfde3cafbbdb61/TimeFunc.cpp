@@ -19,11 +19,14 @@ void ATimeFunc::StartTimer(UObject* WorldContextObject)
 
 	UWorld* World = GEngine->GetWorldFromContextObjectChecked(WorldContextObject);
 	World->GetTimerManager().SetTimer(MyHandle, this, &ThisClass::TimerCallback, 1.0f, true);
-	
+	number = number + 1;
 	if (GEngine)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::White, FString::Printf(TEXT("Begin Timer")));
-		
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::White, FString::Printf(TEXT("Timer on: Tick %i"), number));
+		if (number > 5)
+		{
+			TimerCallback();
+		}
 	}
 }
 
@@ -32,9 +35,8 @@ void ATimeFunc::TimerCallback()
 	// Use CachedWorldContextObject or GetWorld() safely here
 	// Your repeating timer logic...
 	GetWorld()->GetTimerManager().SetTimer(MyHandle, this, &ThisClass::TimerCallback, 1.0f, true);
-	number = number + 1;
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::White, FString::Printf(TEXT("Timer on: Tick %i"), number));
 
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString::Printf(TEXT("TICK TICK TICK")));
 
 }
 

@@ -15,12 +15,18 @@ public:
 	// Sets default values for this actor's properties
 	ATimeFunc();
 
-	UFUNCTION(BlueprintCallable, meta = (WorldContext = "TimerGoUp"))
-	void HandleTimer();
+	UFUNCTION(BlueprintCallable, meta = (WorldContext = "WorldContextObject"))
+	void StartTimer(UObject* WorldContextObject);
+
+	void TimerCallback();
 
 	FTimerHandle MyHandle;
-
 	int number = 1;
+
+private:
+	// Store world context object pointer if needed
+	UObject* CachedWorldContextObject;
+
 
 protected:
 	// Called when the game starts or when spawned
