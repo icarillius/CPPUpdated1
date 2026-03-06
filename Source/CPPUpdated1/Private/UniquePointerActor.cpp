@@ -18,6 +18,7 @@ void AUniquePointerActor::BeginPlay()
 	
 	if (UnqPtr.IsValid())
 	{
+		
 		int holder = UnqPtr->value;
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::White, FString::Printf(TEXT("Builds")));
 
